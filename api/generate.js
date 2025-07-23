@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer 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`  // Added API key here
+        Authorization: "Bearer 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",
       },
       body: JSON.stringify({
         model: "openai/gpt-3.5-turbo",
