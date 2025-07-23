@@ -54,7 +54,7 @@
   <h1>🌐 WebCraft: AI Website Generator</h1>
   <p>Type your website idea below and get a live link!</p>
 
-  <textarea id="prompt" placeholder="e.g. Make a landing page for Roblox Installer"></textarea><br/>
+  <textarea id="prompt" placeholder="e.g. Make a landing page for Roblox Executor"></textarea><br/>
   <button onclick="generateSite()">🚀 Generate Website</button>
 
   <div class="output" id="output"></div>
@@ -67,7 +67,7 @@
       outputDiv.innerHTML = "⏳ Generating website...";
 
       try {
-        const res = await fetch("https://webcraft-api.vercel.app/api/generate", {
+        const res = await fetch("/api/generate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
