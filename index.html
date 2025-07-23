@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebCraft - AI Website Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #38bdf8;
+    }
+
+    textarea {
+      width: 90%;
+      height: 150px;
+      margin-top: 20px;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #38bdf8;
+      color: #000;
+      padding: 12px 24px;
+      border: none;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .output {
+      margin-top: 30px;
+      font-size: 18px;
+      word-break: break-word;
+    }
+
+    .output a {
+      color: #4ade80;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌐 WebCraft: AI Website Generator</h1>
+  <p>Type your website idea below and get a live link!</p>
+
+  <textarea id="prompt" placeholder="e.g. Make a landing page for Roblox Installer"></textarea><br/>
+  <button onclick="generateSite()">🚀 Generate Website</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    async function generateSite() {
+      const prompt = document.getElementById("prompt").value;
+      const outputDiv = document.getElementById("output");
+
+      outputDiv.innerHTML = "⏳ Generating website...";
+
+      try {
+        const res = await fetch("https://webcraft-api.vercel.app/api/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+        if (data.url) {
+          outputDiv.innerHTML = `✅ Website generated: <a href="${data.url}" target="_blank">${data.url}</a>`;
+        } else {
+          outputDiv.innerHTML = "❌ Something went wrong!";
+        }
+      } catch (err) {
+        outputDiv.innerHTML = "❌ Error connecting to server!";
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
